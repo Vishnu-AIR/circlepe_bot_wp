@@ -5,7 +5,6 @@ const axios = require("axios");
 const readable = require("stream").Readable;
 var cloudinary = require("cloudinary").v2;
 const QueueBuffer = require("./queManager");
-const { send } = require("process");
 const accessGs = require("./xlsManager");
 
 const qBuffer = new QueueBuffer();
