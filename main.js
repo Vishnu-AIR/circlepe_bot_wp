@@ -1,4 +1,4 @@
-const { Client, LocalAuth, MessageMedia,  } = require("whatsapp-web.js");
+const { Client, LocalAuth, MessageMedia, RemoteAuth } = require("whatsapp-web.js");
 const qrcode = require("qrcode-terminal");
 const fs = require("fs");
 const axios = require("axios");
@@ -6,25 +6,65 @@ const readable = require("stream").Readable;
 var cloudinary = require("cloudinary").v2;
 const QueueBuffer = require("./queManager");
 const accessGs = require("./xlsManager");
+const { MongoStore } = require('wwebjs-mongo');
+const mongoose = require('mongoose');
+require("dotenv").config()
 
 const qBuffer = new QueueBuffer();
-
-
-
-const client = new Client({
-  authStrategy: new LocalAuth(),
-  webVersionCache: {
-    type: "remote",
-    remotePath:
-      "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html",
-  },
-});
 
 cloudinary.config({
   cloud_name: "dm8sdasaq",
   api_key: "977366518288525",
   api_secret: "8AmYT93edjgiYX3pgRapi9OIP1s",
 });
+
+async function main() {
+
+  mongoose.connection.on('connected', () => console.log('connected to db'));
+  mongoose.connection.on('disconnected', () => console.log('db disconnected'));
+  mongoose.connection.on('close', () => console.log('db close'));
+
+  await mongoose.connect(process.env.MONGODB_URI)
+
+  const store = new MongoStore({ mongoose: mongoose });
+
+  const client = new Client({
+    authStrategy: new RemoteAuth({
+      clientId: "cp-bot-1",
+      store: store,
+      backupSyncIntervalMs: 60000,
+    }),
+    webVersionCache: {
+      type: "remote",
+      remotePath:
+        "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html",
+    },
+    puppeteer: {
+      restartOnAuthFail: true,
+      headless: true,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--no-first-run',
+        '--no-zygote',
+        '--disable-gpu',],
+    }
+  });
+
+
+
+// const client = new Client({
+//   authStrategy: new LocalAuth(),
+//   webVersionCache: {
+//     type: "remote",
+//     remotePath:
+//       "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html",
+//   },
+// });
+
+
 
 client.on("loading_screen", (percent, message) => {
   console.log("LOADING SCREEN", percent, message);
@@ -273,3 +313,5 @@ client.on("message_create", async (msg) => {
 });
 
 client.initialize();
+}
+main()
