@@ -1,3 +1,14 @@
-2024/05/30-15:54:20.118 9003 Reusing MANIFEST /Users/vishnusinghpoonia/work/CirclePe/circlepe_bot_wp/.wwebjs_auth/session/Default/Local Storage/leveldb/MANIFEST-000001
-2024/05/30-15:54:20.119 9003 Recovering log #8
-2024/05/30-15:54:20.119 9003 Reusing old log /Users/vishnusinghpoonia/work/CirclePe/circlepe_bot_wp/.wwebjs_auth/session/Default/Local Storage/leveldb/000008.log 
+2024/06/08-19:22:35.956 8503 Reusing MANIFEST /Users/vishnusinghpoonia/work/CirclePe/circlepe_bot_wp/.wwebjs_auth/session/Default/Local Storage/leveldb/MANIFEST-000001
+2024/06/08-19:22:35.956 8503 Recovering log #91
+2024/06/08-19:22:35.957 8503 Level-0 table #94: started
+2024/06/08-19:22:35.964 8503 Level-0 table #94: 12113 bytes OK
+2024/06/08-19:22:35.974 8503 Delete type=0 #91
+2024/06/08-19:22:35.978 9e03 Compacting 4@0 + 1@1 files
+2024/06/08-19:22:35.988 9e03 Generated table #96@0: 103 keys, 21549 bytes
+2024/06/08-19:22:35.989 9e03 Compacted 4@0 + 1@1 files => 21549 bytes
+2024/06/08-19:22:35.997 9e03 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/06/08-19:22:35.998 9e03 Delete type=2 #89
+2024/06/08-19:22:35.998 9e03 Delete type=2 #94
+2024/06/08-19:22:35.998 9e03 Delete type=2 #92
+2024/06/08-19:22:35.998 9e03 Delete type=2 #87
+2024/06/08-19:22:35.998 9e03 Delete type=2 #84
